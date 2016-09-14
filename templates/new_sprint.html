@@ -1,32 +1,55 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <title>New Sprint</title>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/new_sprint">HOME</a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/list">List</a></li>
+            <li><a href="/new_sprint">Make a new story</a></li>
+            <li class="dropdown">
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
 </head>
 <body>
-    <table>
+    <div class="table">
         <caption><h2>User Story Manager</h2></caption>
-        <thead>
-          <th>Story Title</th>
-          <th>User Story</th>
-          <th>Acceptance Criteria</th>
-          <th>Business Value</th>
-          <th>Estimation</th>
-          <th>Status</th>
-          <th>Update</th>
-          <th>Del</th>
-        </thead>
-    </table>
     {% if data %}
     <form action="{{ url_for('update')}}" method='post'>
     {% else %}
     <form action="{{ url_for('new_sprint')}}" method='post'>
     {% endif %}
-        <input  type='text' name="title" {% if data %} value="{{ data.title }}" {% endif %} required>
-        <input type='text' name="story" {% if data %} value="{{ data.user_story }}" {% endif %} required>
-        <input type='text' name="acceptance_criteria" {% if data %} value="{{ data.acceptance_criteria }}" {% endif %} required>
-        <input type='number' name="business_value" step="100" min='100' max='1500' {% if data %} value="{{ data.business_value }}" {% endif %} required>
-        <input type='number' name="estimation" step="0.5" min='0.5' max='40' {% if data %} value="{{ data.estimation }}" {% endif %} required>
+        <input  type='text' name="title" {% if data %} value="{{ data.title }}" {% endif %} required placeholder="Story title">
+        <input type='text' name="story" {% if data %} value="{{ data.user_story }}" {% endif %} required placeholder="User story">
+        <input type='text' name="acceptance_criteria" {% if data %} value="{{ data.acceptance_criteria }}" {% endif %} required placeholder="Acceptance criteria">
+        <input type='number' name="business_value" step="100" min='100' max='1500' {% if data %} value="{{ data.business_value }}" {% endif %} required placeholder="Value">
+        <input type='number' name="estimation" step="0.5" min='0.5' max='40' {% if data %} value="{{ data.estimation }}" {% endif %} required placeholder="Time">
         <select name="status" {% if data %} value="{{ data.status }}" {% endif %} required>
             <option value="Planning">Planning</option>
             <option value="To Do">To Do</option>
@@ -42,5 +65,12 @@
         <input type='submit' value='create'>
         {% endif %}
     </form>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <div class="footer">Patrik gyakorolja CSS Kft.</div>
+
+
 </body>
 </html>
