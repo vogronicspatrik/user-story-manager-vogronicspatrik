@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New Sprint</title>
+</head>
+<body>
+    <table>
+        <caption><h2>User Story Manager</h2></caption>
+        <thead>
+          <th>Story Title</th>
+          <th>User Story</th>
+          <th>Acceptance Criteria</th>
+          <th>Business Value</th>
+          <th>Estimation</th>
+          <th>Status</th>
+          <th>Update</th>
+          <th>Del</th>
+        </thead>
+    </table>
+    {% if data %}
+    <form action="{{ url_for('update')}}" method='post'>
+    {% else %}
+    <form action="{{ url_for('new_sprint')}}" method='post'>
+    {% endif %}
+        <input  type='text' name="title" {% if data %} value="{{ data.title }}" {% endif %} required>
+        <input type='text' name="story" {% if data %} value="{{ data.user_story }}" {% endif %} required>
+        <input type='text' name="acceptance_criteria" {% if data %} value="{{ data.acceptance_criteria }}" {% endif %} required>
+        <input type='number' name="business_value" step="100" min='100' max='1500' {% if data %} value="{{ data.business_value }}" {% endif %} required>
+        <input type='number' name="estimation" step="0.5" min='0.5' max='40' {% if data %} value="{{ data.estimation }}" {% endif %} required>
+        <select name="status" {% if data %} value="{{ data.status }}" {% endif %} required>
+            <option value="Planning">Planning</option>
+            <option value="To Do">To Do</option>
+            <option value="In progress">In progress</option>
+            <option value="Review">Review</option>
+            <option value="Done">Done</option>
+        </select>
+        {% if data %}
+        <input type="hidden" name="sprint_id" value="{{ data.sprint_id }}">
+        <input type='submit' value='update'>
+
+        {% else %}
+        <input type='submit' value='create'>
+        {% endif %}
+    </form>
+</body>
+</html>
